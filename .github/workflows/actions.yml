@@ -1,0 +1,13 @@
+name: Build PDF
+on:
+  push:
+    branches:
+      - main
+jobs:
+  actions:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Build a PDF
+      run: docker run --volume $PWD:/workdir mactavishediting/latex:latest make
