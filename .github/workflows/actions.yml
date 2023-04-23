@@ -12,9 +12,9 @@ jobs:
     - name: Build PDF
       run: docker run --name latex --volume $PWD/paper.tex:/workdir/paper.tex mactavishediting/latex:latest make
     - name: Copy PDF
-      run: docker cp latex:/workdir/*.pdf $PWD
+      run: docker cp latex:/workdir/paper.pdf $PWD
     - name: Save PDF
       uses: actions/upload-artifact@v3
       with:
         name: paper
-        path: *.pdf
+        path: paper.pdf
