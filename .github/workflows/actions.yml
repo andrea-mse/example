@@ -1,4 +1,4 @@
-name: Build PDF
+name: Build and save PDF
 on:
   push:
     branches:
@@ -9,5 +9,10 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-    - name: Build a PDF
+    - name: Build the PDF
       run: docker run --volume ${PWD}/paper.tex:/workdir/paper.tex mactavishediting/latex:latest make
+    - name: Save the PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: paper
+        path: paper.pdf
