@@ -10,7 +10,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
     - name: Build the PDF
-      run: docker run --volume $PWD:/workdir mactavishediting/latex:latest make
+      run: docker run --volume $PWD/paper.tex:/workdir/paper.tex --volume $PWD/paper.pdf:/workdir/paper.pdf mactavishediting/latex:latest make
     - name: Save the PDF
       uses: actions/upload-artifact@v3
       with:
