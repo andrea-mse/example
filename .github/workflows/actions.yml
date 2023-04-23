@@ -9,10 +9,12 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-    - name: Build the PDF
-      run: docker run --volume $PWD/paper.tex:/workdir/paper.tex --volume $PWD/paper.pdf:/workdir/paper.pdf mactavishediting/latex:latest make
-    - name: Save the PDF
+    - name: Build PDF
+      run: docker run --name latex --volume $PWD/paper.tex:/workdir/paper.tex mactavishediting/latex:latest make
+    - name: Copy PDF
+      run: docker cp latex:/workdir/*.pdf $PWD
+    - name: Save PDF
       uses: actions/upload-artifact@v3
       with:
         name: paper
-        path: paper.pdf
+        path: *.pdf
